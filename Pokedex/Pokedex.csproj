@@ -14,8 +14,17 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="PokeApiNet" Version="4.1.0" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Resource Include="Media\PokedexMainImage.png" />
     <Resource Include="Media\PokemonBackground.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="ViewModels\" />
+    <Folder Include="Views\" />
   </ItemGroup>
 
 </Project>
