@@ -10,7 +10,7 @@
         Width="1200">
 
     <Window.Resources>
-        
+
         <!--Unsichtbare Buttons Style-->
         <Style x:Key="InvisibleButtonStyle" TargetType="Button">
             <Setter Property="HorizontalAlignment" Value="Left"/>
@@ -21,7 +21,7 @@
             <Setter Property="BorderBrush" Value="Transparent"/>
             <Setter Property="BorderThickness" Value="0"/>
         </Style>
-        
+
         <!--Tab Style-->
         <Style TargetType="TabItem">
             <Setter Property="Foreground" Value="White"/>
@@ -62,7 +62,7 @@
                 </Setter.Value>
             </Setter>
         </Style>
-        
+
     </Window.Resources>
 
     <Grid>
@@ -96,13 +96,13 @@
 
                 <!--LinksRechts Navigation Buttons-->
 
-                <Button x:Name="LeftKeypadButton"  Style="{StaticResource InvisibleButtonStyle}" Canvas.Left="324" Canvas.Top="524" Width="34" Height="31"/>
-                <Button x:Name="RightKeypadButton" Style="{StaticResource InvisibleButtonStyle}" Canvas.Left="396" Canvas.Top="521" Width="33" Height="34"/>
+                <Button x:Name="LeftKeypadButton"  Background="{x:Null}"  Canvas.Left="324" Canvas.Top="524" Width="34" Height="31" BorderBrush="{x:Null}"/>
+                <Button x:Name="RightKeypadButton"  Canvas.Left="396" Canvas.Top="521" Width="33" Height="34" Background="{x:Null}" BorderBrush="{x:Null}"/>
 
                 <!--Speichern Löschen Buttons-->
 
                 <Button x:Name="SaveButton"  Style="{StaticResource InvisibleButtonStyle}" Canvas.Left="581" Canvas.Top="475" Width="54" Height="37" HorizontalAlignment="Center"/>
-                <Button x:Name="DeleteButton"  Style="{StaticResource InvisibleButtonStyle}" Canvas.Left="640" Canvas.Top="475" Width="54" Height="39" HorizontalAlignment="Center"/>
+                <Button x:Name="DeleteButton"  Style="{StaticResource InvisibleButtonStyle}" Canvas.Left="638" Canvas.Top="474" Width="58" Height="38"/>
 
                 <!--Pokemon Sprite Image-->
 
