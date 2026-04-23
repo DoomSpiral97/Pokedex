@@ -5,8 +5,51 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Pokedex"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
+        Title="MainWindow" 
+        Height="1000" 
+        Width="1200">
 
+    <Window.Resources>
+        <Style x:Key="InvisibleButtonStyle" TargetType="Button">
+            <Setter Property="HorizontalAlignment" Value="Left"/>
+            <Setter Property="VerticalAlignment" Value="Top"/>
+            <Setter Property="Height" Value="35"/>
+            <Setter Property="Width" Value="57"/>
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="BorderBrush" Value="Transparent"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            
+        </Style>
+    </Window.Resources>
+
+    <Grid>
+        <Image Source="/Media/PokemonBackground.png"
+               Stretch="Fill" />
+
+        <Grid Width="964"
+              Height="662"
+              HorizontalAlignment="Center"
+              VerticalAlignment="Center">
+
+            <Image Source="/Media/PokedexMainImage.png"
+                   Width="964"
+                   Height="662"
+                   Stretch="Uniform" />
+
+            <Canvas Width="964" Height="662">
+                <Button x:Name="Slot1"  Style="{StaticResource InvisibleButtonStyle}" Canvas.Left="581" Canvas.Top="351" Width="54" HorizontalAlignment="Center" Height="37"/>
+                <Button x:Name="Slot2"  Style="{StaticResource InvisibleButtonStyle}" Canvas.Left="640" Canvas.Top="350" Width="52" HorizontalAlignment="Center" Height="39" VerticalAlignment="Center"/>
+                <Button x:Name="Slot3"  Style="{StaticResource InvisibleButtonStyle}" Canvas.Left="697" Canvas.Top="351" Height="37" VerticalAlignment="Center" Width="55"/>
+                <Button x:Name="Slot4"  Style="{StaticResource InvisibleButtonStyle}" Canvas.Left="757" Canvas.Top="350" Width="54" HorizontalAlignment="Center" Height="39"/>
+                <Button x:Name="Slot5"  Style="{StaticResource InvisibleButtonStyle}" Canvas.Left="814" Canvas.Top="351" Height="37" VerticalAlignment="Center" Width="54"/>
+
+                <Button x:Name="Slot6"  Style="{StaticResource InvisibleButtonStyle}" Canvas.Left="580" Canvas.Top="392" Height="37" VerticalAlignment="Center" Width="55"/>
+                <Button x:Name="Slot7"  Style="{StaticResource InvisibleButtonStyle}" Canvas.Left="640" Canvas.Top="392" Width="54" HorizontalAlignment="Center" Height="37"/>
+                <Button x:Name="Slot8"  Style="{StaticResource InvisibleButtonStyle}" Canvas.Left="697" Canvas.Top="392" Width="55" HorizontalAlignment="Center" Height="37"/>
+                <Button x:Name="Slot9"  Style="{StaticResource InvisibleButtonStyle}" Canvas.Left="757" Canvas.Top="393" Height="36" Width="54" HorizontalAlignment="Center"/>
+                <Button x:Name="Slot10" Style="{StaticResource InvisibleButtonStyle}" Canvas.Left="816" Canvas.Top="391" Width="52" HorizontalAlignment="Center" Height="38"/>
+                
+            </Canvas>
+        </Grid>
     </Grid>
 </Window>

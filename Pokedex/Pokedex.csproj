@@ -8,4 +8,14 @@
     <UseWPF>true</UseWPF>
   </PropertyGroup>
 
+  <ItemGroup>
+    <None Remove="Media\PokedexMainImage.png" />
+    <None Remove="Media\PokemonBackground.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Media\PokedexMainImage.png" />
+    <Resource Include="Media\PokemonBackground.png" />
+  </ItemGroup>
+
 </Project>
