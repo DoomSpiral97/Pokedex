@@ -5,11 +5,13 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Pokedex"
         mc:Ignorable="d"
-        Title="MainWindow" 
-        Height="1000" 
+        Title="MainWindow"
+        Height="1000"
         Width="1200">
 
     <Window.Resources>
+        
+        <!--Unsichtbare Buttons Style-->
         <Style x:Key="InvisibleButtonStyle" TargetType="Button">
             <Setter Property="HorizontalAlignment" Value="Left"/>
             <Setter Property="VerticalAlignment" Value="Top"/>
@@ -18,8 +20,49 @@
             <Setter Property="Background" Value="Transparent"/>
             <Setter Property="BorderBrush" Value="Transparent"/>
             <Setter Property="BorderThickness" Value="0"/>
-            
         </Style>
+        
+        <!--Tab Style-->
+        <Style TargetType="TabItem">
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="BorderBrush" Value="Transparent"/>
+            <Setter Property="Padding" Value="0"/>
+            <Setter Property="Width" Value="94"/>
+            <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="TabItem">
+                        <Border x:Name="TabBorder"
+                                Width="{TemplateBinding Width}"
+                                Background="Transparent"
+                                BorderBrush="Transparent"
+                                BorderThickness="0"
+                                Padding="0"
+                               >
+
+                            <ContentPresenter ContentSource="Header"
+                                              HorizontalAlignment="Stretch"
+                                              VerticalAlignment="Center"
+                                              RecognizesAccessKey="True"/>
+                        </Border>
+
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsSelected" Value="True">
+                                <Setter TargetName="TabBorder" Property="Background" Value="#2200BFFF"/>
+                                <Setter TargetName="TabBorder" Property="BorderBrush" Value="#55FFFFFF"/>
+                                <Setter TargetName="TabBorder" Property="BorderThickness" Value="1"/>
+                            </Trigger>
+
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="TabBorder" Property="Background" Value="#1500BFFF"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        
     </Window.Resources>
 
     <Grid>
@@ -37,18 +80,110 @@
                    Stretch="Uniform" />
 
             <Canvas Width="964" Height="662">
-                <Button x:Name="Slot1"  Style="{StaticResource InvisibleButtonStyle}" Canvas.Left="581" Canvas.Top="351" Width="54" HorizontalAlignment="Center" Height="37"/>
-                <Button x:Name="Slot2"  Style="{StaticResource InvisibleButtonStyle}" Canvas.Left="640" Canvas.Top="350" Width="52" HorizontalAlignment="Center" Height="39" VerticalAlignment="Center"/>
-                <Button x:Name="Slot3"  Style="{StaticResource InvisibleButtonStyle}" Canvas.Left="697" Canvas.Top="351" Height="37" VerticalAlignment="Center" Width="55"/>
-                <Button x:Name="Slot4"  Style="{StaticResource InvisibleButtonStyle}" Canvas.Left="757" Canvas.Top="350" Width="54" HorizontalAlignment="Center" Height="39"/>
-                <Button x:Name="Slot5"  Style="{StaticResource InvisibleButtonStyle}" Canvas.Left="814" Canvas.Top="351" Height="37" VerticalAlignment="Center" Width="54"/>
 
-                <Button x:Name="Slot6"  Style="{StaticResource InvisibleButtonStyle}" Canvas.Left="580" Canvas.Top="392" Height="37" VerticalAlignment="Center" Width="55"/>
-                <Button x:Name="Slot7"  Style="{StaticResource InvisibleButtonStyle}" Canvas.Left="640" Canvas.Top="392" Width="54" HorizontalAlignment="Center" Height="37"/>
-                <Button x:Name="Slot8"  Style="{StaticResource InvisibleButtonStyle}" Canvas.Left="697" Canvas.Top="392" Width="55" HorizontalAlignment="Center" Height="37"/>
-                <Button x:Name="Slot9"  Style="{StaticResource InvisibleButtonStyle}" Canvas.Left="757" Canvas.Top="393" Height="36" Width="54" HorizontalAlignment="Center"/>
-                <Button x:Name="Slot10" Style="{StaticResource InvisibleButtonStyle}" Canvas.Left="816" Canvas.Top="391" Width="52" HorizontalAlignment="Center" Height="38"/>
-                
+                <!--Slot Buttons-->
+                <Button x:Name="Slot1Button"  Style="{StaticResource InvisibleButtonStyle}" Canvas.Left="581" Canvas.Top="351" Width="54" Height="37"/>
+                <Button x:Name="Slot2Button"  Style="{StaticResource InvisibleButtonStyle}" Canvas.Left="640" Canvas.Top="350" Width="52" Height="39"/>
+                <Button x:Name="Slot3Button"  Style="{StaticResource InvisibleButtonStyle}" Canvas.Left="697" Canvas.Top="351" Width="55" Height="37"/>
+                <Button x:Name="Slot4Button"  Style="{StaticResource InvisibleButtonStyle}" Canvas.Left="757" Canvas.Top="350" Width="54" Height="39"/>
+                <Button x:Name="Slot5Button"  Style="{StaticResource InvisibleButtonStyle}" Canvas.Left="814" Canvas.Top="351" Width="54" Height="37"/>
+
+                <Button x:Name="Slot6Button"  Style="{StaticResource InvisibleButtonStyle}" Canvas.Left="580" Canvas.Top="392" Width="55" Height="37"/>
+                <Button x:Name="Slot7Button"  Style="{StaticResource InvisibleButtonStyle}" Canvas.Left="640" Canvas.Top="392" Width="54" Height="37"/>
+                <Button x:Name="Slot8Button"  Style="{StaticResource InvisibleButtonStyle}" Canvas.Left="697" Canvas.Top="392" Width="55" Height="37"/>
+                <Button x:Name="Slot9Button"  Style="{StaticResource InvisibleButtonStyle}" Canvas.Left="757" Canvas.Top="393" Width="54" Height="36"/>
+                <Button x:Name="Slot10Button" Style="{StaticResource InvisibleButtonStyle}" Canvas.Left="816" Canvas.Top="391" Width="52" Height="38"/>
+
+                <!--LinksRechts Navigation Buttons-->
+
+                <Button x:Name="LeftKeypadButton"  Style="{StaticResource InvisibleButtonStyle}" Canvas.Left="324" Canvas.Top="524" Width="34" Height="31"/>
+                <Button x:Name="RightKeypadButton" Style="{StaticResource InvisibleButtonStyle}" Canvas.Left="396" Canvas.Top="521" Width="33" Height="34"/>
+
+                <!--Speichern Löschen Buttons-->
+
+                <Button x:Name="SaveButton"  Style="{StaticResource InvisibleButtonStyle}" Canvas.Left="581" Canvas.Top="475" Width="54" Height="37" HorizontalAlignment="Center"/>
+                <Button x:Name="DeleteButton"  Style="{StaticResource InvisibleButtonStyle}" Canvas.Left="640" Canvas.Top="475" Width="54" Height="39" HorizontalAlignment="Center"/>
+
+                <!--Pokemon Sprite Image-->
+
+                <Image Source="/Media/PokedexMainImage.png"
+                       x:Name="PokemonSpriteImage"
+                       Panel.ZIndex="1"
+                       Canvas.Left="158"
+                       Canvas.Top="219"
+                       Width="200"
+                       Height="155"/>
+
+                <!--Pokemon Name  Label-->
+
+                <Label x:Name="PokemonNameLabel"
+                       Content="Lange"
+                       Canvas.Left="143"
+                       Canvas.Top="563"
+                       Width="133"
+                       Height="31"
+                       FontFamily="Noto Sans Georgian Bold"
+                       FontSize="14"/>
+
+                <!-- Eigenschaften Tabs-->
+
+                <TabControl Canvas.Left="580"
+                            Canvas.Top="218"
+                            Width="288"
+                            Height="118"
+                            Background="Transparent"
+                            BorderBrush="Transparent"
+                            Foreground="White"
+                            HorizontalContentAlignment="Stretch">
+
+                    <TabItem>
+                        <TabItem.Header>
+                            <TextBlock Text="Typen"
+                                       Foreground="White"
+                                       TextAlignment="Center" FontWeight="Bold"/>
+                        </TabItem.Header>
+                        <Grid Background="Transparent">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="281*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Text="Feuer / Flug"
+                                       Foreground="White"
+                                       Margin="10,10,9,10"/>
+                        </Grid>
+                    </TabItem>
+
+                    <TabItem>
+                        <TabItem.Header>
+                            <TextBlock Text="Attacken"
+                                       Foreground="White"
+                                       TextAlignment="Center"
+                                       HorizontalAlignment="Stretch" FontWeight="Bold"/>
+                        </TabItem.Header>
+                        <Grid Background="Transparent">
+                            <StackPanel Margin="10">
+                                <TextBlock Text="Flammenwurf"
+                                           Foreground="White"/>
+                            </StackPanel>
+                        </Grid>
+                    </TabItem>
+
+                    <TabItem>
+                        <TabItem.Header>
+                            <TextBlock Text="Stats"
+                                       Foreground="White"
+                                       TextAlignment="Center"
+                                       HorizontalAlignment="Stretch" FontWeight="Bold"/>
+                        </TabItem.Header>
+                        <Grid Background="Transparent">
+                            <StackPanel Margin="10">
+                                <TextBlock Text="Größe: 1,7 m"
+                                           Foreground="White"/>
+                            </StackPanel>
+                        </Grid>
+                    </TabItem>
+                </TabControl>
+
             </Canvas>
         </Grid>
     </Grid>
