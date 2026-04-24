@@ -62,13 +62,34 @@ namespace Pokedex.ViewModels
 
         public ICommand PlaySoundCommand { get; }
 
+        public ICommand NextPokemonCommand { get; }
+        public ICommand PreviousPokemonCommand { get; }
+
         public MainViewModel()
         {
             SearchCommand = new RelayCommand(SearchPokemonAsync);
             PlaySoundCommand = new RelayCommand(PlayCryAsync);
+            NextPokemonCommand = new RelayCommand(NextPokemonAsync);      
+            PreviousPokemonCommand = new RelayCommand(PreviousPokemonAsync);
         }
 
         // Methoden
+        private void UpdateUI()
+        {
+            // Wenn nix zurückgekommen ist → Fehlermeldung zeigen
+            if (_latestResult == null)
+            {
+                ErrorMessage = "Pokémon nicht gefunden!";
+            }
+            else
+            {
+                // Alles gut → Pokémon ans ViewModel übergeben Bindings aktualisieren die UI automatisch
+                CurrentPokemon = _latestResult;
+            }
+
+            // Ladeanimation wieder aus
+            IsLoading = false;
+        }
 
         private async Task SearchPokemonAsync()
         {
@@ -108,8 +129,26 @@ namespace Pokedex.ViewModels
             memoryStream.Dispose();
         }
 
-        // INotifyPropertyChanged
+        private async Task NextPokemonAsync()
+        {
+            // Nix tun wenn kein Pokémon geladen
+            if (CurrentPokemon == null) return;
 
+            // ID um 1 erhöhen und als String suchen
+            SearchText = (CurrentPokemon.Id + 1).ToString();
+            await SearchPokemonAsync();
+        }
+
+        private async Task PreviousPokemonAsync()
+        {
+            // Nix tun wenn kein Pokémon geladen oder schon bei #1
+            if (CurrentPokemon == null) return;
+            if (CurrentPokemon.Id <= 1) return;
+
+            // ID um 1 verringern und als String suchen
+            SearchText = (CurrentPokemon.Id - 1).ToString();
+            await SearchPokemonAsync();
+        }
 
         public event PropertyChangedEventHandler? PropertyChanged;
 
@@ -118,22 +157,6 @@ namespace Pokedex.ViewModels
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
-        private void UpdateUI()
-        {
-            // Wenn nix zurückgekommen ist → Fehlermeldung zeigen
-            if (_latestResult == null)
-            {
-                ErrorMessage = "Pokémon nicht gefunden!";
-            }
-            else
-            {
-                // Alles gut → Pokémon ans ViewModel übergeben Bindings aktualisieren die UI automatisch
-                CurrentPokemon = _latestResult;
-            }
-
-            // Ladeanimation wieder aus
-            IsLoading = false;
-        }
 
 
     }
