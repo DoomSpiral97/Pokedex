@@ -286,7 +286,9 @@
                          Foreground="White"
                          SelectionBrush="{x:Null}"
                          BorderBrush="{x:Null}"
-                         VerticalAlignment="Center"/>
+                         VerticalAlignment="Center"
+                         CaretBrush="White"
+                         />
 
                 <!--Suchen Button-->
                 <Button x:Name="SearchButton"
