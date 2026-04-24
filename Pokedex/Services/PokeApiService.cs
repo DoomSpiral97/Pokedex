@@ -65,8 +65,8 @@ namespace Pokedex.Services
                     SpecialAttack = specialAttack,
                     SpecialDefense = specialDefense,
                     Speed = speed,
-                    SpriteUrl = pokemon.Sprites.FrontDefault ?? string.Empty, 
-
+                    SpriteUrl = pokemon.Sprites.FrontDefault ?? string.Empty,
+                    SoundUrl = $"https://raw.githubusercontent.com/PokeAPI/cries/main/cries/pokemon/latest/{pokemon.Id}.ogg",
                 };
             }
             catch (HttpRequestException)

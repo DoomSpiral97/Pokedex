@@ -102,8 +102,8 @@
                 <Image x:Name="PokemonSpriteImage"
                        Source="{Binding CurrentPokemon.SpriteUrl}"
                        Panel.ZIndex="1"
-                       Canvas.Left="118"
-                       Canvas.Top="204"
+                       Canvas.Left="141"
+                       Canvas.Top="227"
                        Width="240"
                        Height="170"/>
 
@@ -270,6 +270,9 @@
                            Canvas.Left="574"
                            Canvas.Top="607"
                            Width="200"/>
+                
+                <!--Sound Button-->
+                <Button x:Name="SoundButton" Command="{Binding PlaySoundCommand}"  Style="{StaticResource InvisibleButtonStyle}" Canvas.Left="133" Canvas.Top="411" Width="39" Height="36" VerticalAlignment="Center"/>
 
             </Canvas>
         </Grid>

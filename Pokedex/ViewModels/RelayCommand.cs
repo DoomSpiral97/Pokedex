@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 using System.Windows.Input;
 
+
 namespace Pokedex.ViewModels
 {
     public class RelayCommand : ICommand
@@ -24,6 +25,7 @@ namespace Pokedex.ViewModels
         {
             await _execute();
         }
+
 
         // Wird benötigt weil ICommand es vorschreibt
         public event EventHandler? CanExecuteChanged;

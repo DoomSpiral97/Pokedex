@@ -5,6 +5,10 @@ using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
+using NAudio.Wave;
+using NAudio.Vorbis;
+using System.Net.Http;
+using System.IO;
 
 namespace Pokedex.ViewModels
 {
@@ -17,6 +21,8 @@ namespace Pokedex.ViewModels
 
         // Service — der einzige Ort der die API kennt
         private readonly PokeApiService _service = new PokeApiService();
+
+        private readonly HttpClient _httpClient = new HttpClient();
 
         // -------------------------------------------------------
         // Properties
@@ -54,9 +60,12 @@ namespace Pokedex.ViewModels
 
         public ICommand SearchCommand { get; }
 
+        public ICommand PlaySoundCommand { get; }
+
         public MainViewModel()
         {
             SearchCommand = new RelayCommand(SearchPokemonAsync);
+            PlaySoundCommand = new RelayCommand(PlayCryAsync);
         }
 
         // Methoden
@@ -77,11 +86,30 @@ namespace Pokedex.ViewModels
             Application.Current.Dispatcher.Invoke(UpdateUI);
         }
 
+        private async Task PlayCryAsync()
+        {
+            if (CurrentPokemon == null) return;
+            if (string.IsNullOrEmpty(CurrentPokemon.SoundUrl)) return;  // ← war SoundUrl
 
+            byte[] audioData = await _httpClient.GetByteArrayAsync(CurrentPokemon.SoundUrl);
+            MemoryStream memoryStream = new MemoryStream(audioData);
+            VorbisWaveReader vorbisReader = new VorbisWaveReader(memoryStream);
+            WaveOutEvent waveOut = new WaveOutEvent();
+            waveOut.Init(vorbisReader);
+            waveOut.Play();
 
-       
+            while (waveOut.PlaybackState == PlaybackState.Playing)
+            {
+                await Task.Delay(100);
+            }
+
+            waveOut.Dispose();
+            vorbisReader.Dispose();
+            memoryStream.Dispose();
+        }
+
         // INotifyPropertyChanged
-        
+
 
         public event PropertyChangedEventHandler? PropertyChanged;
 

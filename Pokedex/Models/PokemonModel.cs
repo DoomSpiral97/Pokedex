@@ -23,6 +23,8 @@ namespace Pokedex.Models
 
         public string SpriteUrl { get; set; } = string.Empty;
 
+        public string SoundUrl { get; set; } = string.Empty;    
+
 
     }
 }
