@@ -159,7 +159,7 @@
                                     <DataTemplate>
                                         <TextBlock Text="{Binding}"
                                                    Foreground="White"
-                                                   Margin="0,2"/>
+                                                   Margin="0,2" FontWeight="Bold"/>
                                     </DataTemplate>
                                 </ItemsControl.ItemTemplate>
                             </ItemsControl>
@@ -170,18 +170,31 @@
                     <TabItem>
                         <TabItem.Header>
                             <TextBlock Text="Attacken"
-                                       Foreground="White"
-                                       TextAlignment="Center"
-                                       HorizontalAlignment="Stretch"
-                                       FontWeight="Bold"/>
+                   Foreground="White"
+                   TextAlignment="Center"
+                   HorizontalAlignment="Stretch"
+                   FontWeight="Bold"/>
                         </TabItem.Header>
-                        <Grid Background="Transparent" Margin="10">
+                        <Grid Background="Transparent" Margin="6">
                             <ItemsControl ItemsSource="{Binding CurrentPokemon.Moves}">
+                                <ItemsControl.ItemsPanel>
+                                    <ItemsPanelTemplate>
+                                        <UniformGrid Columns="2"/>
+                                    </ItemsPanelTemplate>
+                                </ItemsControl.ItemsPanel>
                                 <ItemsControl.ItemTemplate>
                                     <DataTemplate>
-                                        <TextBlock Text="{Binding}"
-                                                   Foreground="White"
-                                                   Margin="0,2"/>
+                                        <Border Margin="2"
+                            Background="#33FFFFFF"
+                            CornerRadius="4"
+                            Padding="4,3">
+                                            <TextBlock Text="{Binding}"
+                                   Foreground="White"
+                                   FontSize="11"
+                                   FontWeight="Bold"
+                                   TextAlignment="Center"
+                                   VerticalAlignment="Center"/>
+                                        </Border>
                                     </DataTemplate>
                                 </ItemsControl.ItemTemplate>
                             </ItemsControl>

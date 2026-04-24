@@ -9,6 +9,24 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Media\Icons\Icon Bug.png" />
+    <None Remove="Media\Icons\Icon Dark.png" />
+    <None Remove="Media\Icons\Icon Dragon.png" />
+    <None Remove="Media\Icons\Icon Electric.png" />
+    <None Remove="Media\Icons\Icon Fairy.png" />
+    <None Remove="Media\Icons\Icon Fighting.png" />
+    <None Remove="Media\Icons\Icon Fire.png" />
+    <None Remove="Media\Icons\Icon Flying.png" />
+    <None Remove="Media\Icons\Icon Ghost.png" />
+    <None Remove="Media\Icons\Icon Grass.png" />
+    <None Remove="Media\Icons\Icon Ground.png" />
+    <None Remove="Media\Icons\Icon Ice.png" />
+    <None Remove="Media\Icons\Icon Normal.png" />
+    <None Remove="Media\Icons\Icon Poison.png" />
+    <None Remove="Media\Icons\Icon Psychic.png" />
+    <None Remove="Media\Icons\Icon Rock.png" />
+    <None Remove="Media\Icons\Icon Steel.png" />
+    <None Remove="Media\Icons\Icon Water.png" />
     <None Remove="Media\PokedexMainImage.png" />
     <None Remove="Media\PokemonBackground.png" />
   </ItemGroup>
@@ -20,6 +38,24 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="Media\Icons\Icon Bug.png" />
+    <Resource Include="Media\Icons\Icon Dark.png" />
+    <Resource Include="Media\Icons\Icon Dragon.png" />
+    <Resource Include="Media\Icons\Icon Electric.png" />
+    <Resource Include="Media\Icons\Icon Fairy.png" />
+    <Resource Include="Media\Icons\Icon Fighting.png" />
+    <Resource Include="Media\Icons\Icon Fire.png" />
+    <Resource Include="Media\Icons\Icon Flying.png" />
+    <Resource Include="Media\Icons\Icon Ghost.png" />
+    <Resource Include="Media\Icons\Icon Grass.png" />
+    <Resource Include="Media\Icons\Icon Ground.png" />
+    <Resource Include="Media\Icons\Icon Ice.png" />
+    <Resource Include="Media\Icons\Icon Normal.png" />
+    <Resource Include="Media\Icons\Icon Poison.png" />
+    <Resource Include="Media\Icons\Icon Psychic.png" />
+    <Resource Include="Media\Icons\Icon Rock.png" />
+    <Resource Include="Media\Icons\Icon Steel.png" />
+    <Resource Include="Media\Icons\Icon Water.png" />
     <Resource Include="Media\PokedexMainImage.png" />
     <Resource Include="Media\PokemonBackground.png" />
   </ItemGroup>

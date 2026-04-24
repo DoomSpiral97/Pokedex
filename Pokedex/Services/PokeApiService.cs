@@ -24,17 +24,16 @@ namespace Pokedex.Services
                 List<string> types = new List<string>();
                 foreach (PokemonType pokemonType in pokemon.Types)
                 {
-                    types.Add(pokemonType.Type.Name);
+                    types.Add(Capitalize(pokemonType.Type.Name));
                 }
 
                 // Moves befüllen (nur die ersten 4)
-
                 List<string> moves = new List<string>();
                 int moveCount = 0;
                 foreach (PokemonMove pokemonMove in pokemon.Moves)
                 {
                     if (moveCount >= 4) break;
-                    moves.Add(pokemonMove.Move.Name);
+                    moves.Add(Capitalize(pokemonMove.Move.Name));
                     moveCount++;
                 }
 
@@ -55,7 +54,7 @@ namespace Pokedex.Services
                 return new PokemonModel
                 {
                     Id = pokemon.Id,
-                    Name = pokemon.Name,
+                    Name =Capitalize(pokemon.Name),
 
                     Types = types,
                     Moves = moves,
@@ -73,6 +72,13 @@ namespace Pokedex.Services
             {
                 return null;
             }
+        }
+
+        // Hilfsmethode in PokeApiService.cs
+        private string Capitalize(string text)
+        {
+            if (string.IsNullOrEmpty(text)) return text;
+            return char.ToUpper(text[0]) + text.Substring(1);
         }
     }
 }
