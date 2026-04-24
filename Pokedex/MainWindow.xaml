@@ -3,6 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:converters="clr-namespace:Pokedex.Converters"
         xmlns:local="clr-namespace:Pokedex"
         mc:Ignorable="d"
         Title="MainWindow"
@@ -58,6 +59,9 @@
                 </Setter.Value>
             </Setter>
         </Style>
+        
+        <!--Converter-->
+        <converters:TypeIconConverter x:Key="TypeIconConverter"/>
 
     </Window.Resources>
 
@@ -155,11 +159,17 @@
                         </TabItem.Header>
                         <Grid Background="Transparent" Margin="10">
                             <ItemsControl ItemsSource="{Binding CurrentPokemon.Types}">
+                                <ItemsControl.ItemsPanel>
+                                    <ItemsPanelTemplate>
+                                        <StackPanel Orientation="Horizontal"/>
+                                    </ItemsPanelTemplate>
+                                </ItemsControl.ItemsPanel>
                                 <ItemsControl.ItemTemplate>
                                     <DataTemplate>
-                                        <TextBlock Text="{Binding}"
-                                                   Foreground="White"
-                                                   Margin="0,2" FontWeight="Bold"/>
+                                        <Image Source="{Binding Converter={StaticResource TypeIconConverter}}"
+                                            Width="75"
+                                            Height="75"
+                                            Margin="2,0"/>
                                     </DataTemplate>
                                 </ItemsControl.ItemTemplate>
                             </ItemsControl>
