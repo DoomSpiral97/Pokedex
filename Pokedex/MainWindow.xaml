@@ -9,125 +9,117 @@
         Height="1000"
         Width="1200">
 
-	<Window.Resources>
+    <Window.Resources>
 
-		<!--Unsichtbare Buttons Style-->
-		<Style x:Key="InvisibleButtonStyle" TargetType="Button">
-			<Setter Property="HorizontalAlignment" Value="Left"/>
-			<Setter Property="VerticalAlignment" Value="Top"/>
-			<Setter Property="Height" Value="35"/>
-			<Setter Property="Width" Value="57"/>
-			<Setter Property="Background" Value="Transparent"/>
-			<Setter Property="BorderBrush" Value="Transparent"/>
-			<Setter Property="BorderThickness" Value="0"/>
-		</Style>
+        <!--Unsichtbare Buttons Style-->
+        <Style x:Key="InvisibleButtonStyle" TargetType="Button">
+            <Setter Property="HorizontalAlignment" Value="Left"/>
+            <Setter Property="VerticalAlignment" Value="Top"/>
+            <Setter Property="Height" Value="35"/>
+            <Setter Property="Width" Value="57"/>
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="BorderBrush" Value="Transparent"/>
+            <Setter Property="BorderThickness" Value="0"/>
+        </Style>
 
-		<!--Tab Style-->
-		<Style TargetType="TabItem">
-			<Setter Property="Foreground" Value="White"/>
-			<Setter Property="Background" Value="Transparent"/>
-			<Setter Property="BorderBrush" Value="Transparent"/>
-			<Setter Property="Padding" Value="0"/>
-			<Setter Property="Width" Value="94"/>
-			<Setter Property="HorizontalContentAlignment" Value="Stretch"/>
-			<Setter Property="Template">
-				<Setter.Value>
-					<ControlTemplate TargetType="TabItem">
-						<Border x:Name="TabBorder"
+        <!--Tab Style-->
+        <Style TargetType="TabItem">
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="BorderBrush" Value="Transparent"/>
+            <Setter Property="Padding" Value="0"/>
+            <Setter Property="Width" Value="94"/>
+            <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="TabItem">
+                        <Border x:Name="TabBorder"
                                 Width="{TemplateBinding Width}"
                                 Background="Transparent"
                                 BorderBrush="Transparent"
                                 BorderThickness="0"
-                                Padding="0"
-                               >
-
-							<ContentPresenter ContentSource="Header"
+                                Padding="0">
+                            <ContentPresenter ContentSource="Header"
                                               HorizontalAlignment="Stretch"
                                               VerticalAlignment="Center"
                                               RecognizesAccessKey="True"/>
-						</Border>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsSelected" Value="True">
+                                <Setter TargetName="TabBorder" Property="Background" Value="#2200BFFF"/>
+                                <Setter TargetName="TabBorder" Property="BorderBrush" Value="#55FFFFFF"/>
+                                <Setter TargetName="TabBorder" Property="BorderThickness" Value="1"/>
+                            </Trigger>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="TabBorder" Property="Background" Value="#1500BFFF"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
 
-						<ControlTemplate.Triggers>
-							<Trigger Property="IsSelected" Value="True">
-								<Setter TargetName="TabBorder" Property="Background" Value="#2200BFFF"/>
-								<Setter TargetName="TabBorder" Property="BorderBrush" Value="#55FFFFFF"/>
-								<Setter TargetName="TabBorder" Property="BorderThickness" Value="1"/>
-							</Trigger>
+    </Window.Resources>
 
-							<Trigger Property="IsMouseOver" Value="True">
-								<Setter TargetName="TabBorder" Property="Background" Value="#1500BFFF"/>
-							</Trigger>
-						</ControlTemplate.Triggers>
-					</ControlTemplate>
-				</Setter.Value>
-			</Setter>
-		</Style>
+    <Grid>
+        <Image Source="/Media/PokemonBackground.png"
+               Stretch="Fill"/>
 
-	</Window.Resources>
-
-	<Grid>
-		<Image Source="/Media/PokemonBackground.png"
-               Stretch="Fill" />
-
-		<Grid Width="964"
+        <Grid Width="964"
               Height="662"
               HorizontalAlignment="Center"
               VerticalAlignment="Center">
 
-			<Image Source="/Media/PokedexMainImage.png"
+            <Image Source="/Media/PokedexMainImage.png"
                    Width="964"
                    Height="662"
-                   Stretch="Uniform" />
+                   Stretch="Uniform"/>
 
-			<Canvas Width="964" Height="662">
+            <Canvas Width="964" Height="662">
 
-				<!--Slot Buttons-->
-				<Button x:Name="Slot1Button"  Style="{StaticResource InvisibleButtonStyle}" Canvas.Left="581" Canvas.Top="351" Width="54" Height="37"/>
-				<Button x:Name="Slot2Button"  Style="{StaticResource InvisibleButtonStyle}" Canvas.Left="640" Canvas.Top="350" Width="52" Height="39"/>
-				<Button x:Name="Slot3Button"  Style="{StaticResource InvisibleButtonStyle}" Canvas.Left="697" Canvas.Top="351" Width="55" Height="37"/>
-				<Button x:Name="Slot4Button"  Style="{StaticResource InvisibleButtonStyle}" Canvas.Left="757" Canvas.Top="350" Width="54" Height="39"/>
-				<Button x:Name="Slot5Button"  Style="{StaticResource InvisibleButtonStyle}" Canvas.Left="814" Canvas.Top="351" Width="54" Height="37"/>
+                <!--Slot Buttons-->
+                <Button x:Name="Slot1Button"  Style="{StaticResource InvisibleButtonStyle}" Canvas.Left="581" Canvas.Top="351" Width="54" Height="37"/>
+                <Button x:Name="Slot2Button"  Style="{StaticResource InvisibleButtonStyle}" Canvas.Left="640" Canvas.Top="350" Width="52" Height="39"/>
+                <Button x:Name="Slot3Button"  Style="{StaticResource InvisibleButtonStyle}" Canvas.Left="697" Canvas.Top="351" Width="55" Height="37"/>
+                <Button x:Name="Slot4Button"  Style="{StaticResource InvisibleButtonStyle}" Canvas.Left="757" Canvas.Top="350" Width="54" Height="39"/>
+                <Button x:Name="Slot5Button"  Style="{StaticResource InvisibleButtonStyle}" Canvas.Left="814" Canvas.Top="351" Width="54" Height="37"/>
 
-				<Button x:Name="Slot6Button"  Style="{StaticResource InvisibleButtonStyle}" Canvas.Left="580" Canvas.Top="392" Width="55" Height="37"/>
-				<Button x:Name="Slot7Button"  Style="{StaticResource InvisibleButtonStyle}" Canvas.Left="640" Canvas.Top="392" Width="54" Height="37"/>
-				<Button x:Name="Slot8Button"  Style="{StaticResource InvisibleButtonStyle}" Canvas.Left="697" Canvas.Top="392" Width="55" Height="37"/>
-				<Button x:Name="Slot9Button"  Style="{StaticResource InvisibleButtonStyle}" Canvas.Left="757" Canvas.Top="393" Width="54" Height="36"/>
-				<Button x:Name="Slot10Button" Style="{StaticResource InvisibleButtonStyle}" Canvas.Left="816" Canvas.Top="391" Width="52" Height="38"/>
+                <Button x:Name="Slot6Button"  Style="{StaticResource InvisibleButtonStyle}" Canvas.Left="580" Canvas.Top="392" Width="55" Height="37"/>
+                <Button x:Name="Slot7Button"  Style="{StaticResource InvisibleButtonStyle}" Canvas.Left="640" Canvas.Top="392" Width="54" Height="37"/>
+                <Button x:Name="Slot8Button"  Style="{StaticResource InvisibleButtonStyle}" Canvas.Left="697" Canvas.Top="392" Width="55" Height="37"/>
+                <Button x:Name="Slot9Button"  Style="{StaticResource InvisibleButtonStyle}" Canvas.Left="757" Canvas.Top="393" Width="54" Height="36"/>
+                <Button x:Name="Slot10Button" Style="{StaticResource InvisibleButtonStyle}" Canvas.Left="816" Canvas.Top="391" Width="52" Height="38"/>
 
-				<!--LinksRechts Navigation Buttons-->
+                <!--LinksRechts Navigation Buttons-->
+                <Button x:Name="LeftKeypadButton"  Background="{x:Null}" Canvas.Left="324" Canvas.Top="524" Width="34" Height="31" BorderBrush="{x:Null}"/>
+                <Button x:Name="RightKeypadButton" Background="{x:Null}" Canvas.Left="396" Canvas.Top="521" Width="33" Height="34" BorderBrush="{x:Null}"/>
 
-				<Button x:Name="LeftKeypadButton"  Background="{x:Null}"  Canvas.Left="324" Canvas.Top="524" Width="34" Height="31" BorderBrush="{x:Null}"/>
-				<Button x:Name="RightKeypadButton"  Canvas.Left="396" Canvas.Top="521" Width="33" Height="34" Background="{x:Null}" BorderBrush="{x:Null}"/>
+                <!--Speichern Löschen Buttons-->
+                <Button x:Name="SaveButton"   Style="{StaticResource InvisibleButtonStyle}" Canvas.Left="581" Canvas.Top="475" Width="54"  Height="37" HorizontalAlignment="Center"/>
+                <Button x:Name="DeleteButton" Style="{StaticResource InvisibleButtonStyle}" Canvas.Left="638" Canvas.Top="474" Width="58"  Height="38"/>
 
-				<!--Speichern Löschen Buttons-->
-
-				<Button x:Name="SaveButton"  Style="{StaticResource InvisibleButtonStyle}" Canvas.Left="581" Canvas.Top="475" Width="54" Height="37" HorizontalAlignment="Center"/>
-				<Button x:Name="DeleteButton"  Style="{StaticResource InvisibleButtonStyle}" Canvas.Left="638" Canvas.Top="474" Width="58" Height="38"/>
-
-				<!--Pokemon Sprite Image-->
-
-				<Image Source="/Media/PokedexMainImage.png"
-                       x:Name="PokemonSpriteImage"
+                <!--Pokemon Sprite Image-->
+                <Image x:Name="PokemonSpriteImage"
+                       Source="{Binding CurrentPokemon.SpriteUrl}"
                        Panel.ZIndex="1"
-                       Canvas.Left="158"
-                       Canvas.Top="219"
-                       Width="200"
-                       Height="155"/>
+                       Canvas.Left="118"
+                       Canvas.Top="204"
+                       Width="240"
+                       Height="170"/>
 
-				<!--Pokemon Name  Label-->
-
-				<Label x:Name="PokemonNameLabel"
-                       Content="Lange"
+                <!--Pokemon Name Label-->
+                <Label x:Name="PokemonNameLabel"
+                       Content="{Binding CurrentPokemon.Name}"
                        Canvas.Left="143"
                        Canvas.Top="563"
                        Width="133"
                        Height="31"
+                       Foreground="White"
                        FontFamily="Noto Sans Georgian Bold"
                        FontSize="14"/>
 
-				<!-- Eigenschaften Tabs-->
-
-				<TabControl Canvas.Left="580"
+                <!-- Eigenschaften Tabs-->
+                <TabControl Canvas.Left="580"
                             Canvas.Top="218"
                             Width="288"
                             Height="118"
@@ -136,83 +128,150 @@
                             Foreground="White"
                             HorizontalContentAlignment="Stretch">
 
-					<TabItem>
-						<TabItem.Header>
-							<TextBlock Text="Typen"
-                                       Foreground="White"
-                                       TextAlignment="Center" FontWeight="Bold"/>
-						</TabItem.Header>
-						<Grid Background="Transparent">
-							<Grid.ColumnDefinitions>
-								<ColumnDefinition Width="281*"/>
-								<ColumnDefinition Width="*"/>
-							</Grid.ColumnDefinitions>
-							<TextBlock Text="Feuer / Flug"
-                                       Foreground="White"
-                                       Margin="10,10,9,10"/>
-						</Grid>
-					</TabItem>
-
-					<TabItem>
-						<TabItem.Header>
-							<TextBlock Text="Attacken"
+                    <!-- Tab: Typen -->
+                    <TabItem>
+                        <TabItem.Header>
+                            <TextBlock Text="Typen"
                                        Foreground="White"
                                        TextAlignment="Center"
-                                       HorizontalAlignment="Stretch" FontWeight="Bold"/>
-						</TabItem.Header>
-						<Grid Background="Transparent">
-							<StackPanel Margin="10">
-								<TextBlock Text="Flammenwurf"
-                                           Foreground="White"/>
-							</StackPanel>
-						</Grid>
-					</TabItem>
+                                       FontWeight="Bold"/>
+                        </TabItem.Header>
+                        <Grid Background="Transparent" Margin="10">
+                            <ItemsControl ItemsSource="{Binding CurrentPokemon.Types}">
+                                <ItemsControl.ItemTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding}"
+                                                   Foreground="White"
+                                                   Margin="0,2"/>
+                                    </DataTemplate>
+                                </ItemsControl.ItemTemplate>
+                            </ItemsControl>
+                        </Grid>
+                    </TabItem>
 
-					<TabItem>
-						<TabItem.Header>
-							<TextBlock Text="Stats"
+                    <!-- Tab: Attacken -->
+                    <TabItem>
+                        <TabItem.Header>
+                            <TextBlock Text="Attacken"
                                        Foreground="White"
                                        TextAlignment="Center"
-                                       HorizontalAlignment="Stretch" FontWeight="Bold"/>
-						</TabItem.Header>
-						<Grid Background="Transparent">
-							<StackPanel Margin="10">
-								<TextBlock Text="Größe: 1,7 m"
-                                           Foreground="White"/>
-							</StackPanel>
-						</Grid>
-					</TabItem>
-				</TabControl>
+                                       HorizontalAlignment="Stretch"
+                                       FontWeight="Bold"/>
+                        </TabItem.Header>
+                        <Grid Background="Transparent" Margin="10">
+                            <ItemsControl ItemsSource="{Binding CurrentPokemon.Moves}">
+                                <ItemsControl.ItemTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding}"
+                                                   Foreground="White"
+                                                   Margin="0,2"/>
+                                    </DataTemplate>
+                                </ItemsControl.ItemTemplate>
+                            </ItemsControl>
+                        </Grid>
+                    </TabItem>
 
-				<!--Suche nach Name/ID Feld-->
+                    <!-- Tab: Stats -->
+                    <TabItem>
+                        <TabItem.Header>
+                            <TextBlock Text="Stats"
+                                       Foreground="White"
+                                       TextAlignment="Center"
+                                       HorizontalAlignment="Stretch"
+                                       FontWeight="Bold"/>
+                        </TabItem.Header>
+                        <Grid Background="Transparent">
+                            <StackPanel Orientation="Horizontal"
+                                        HorizontalAlignment="Center"
+                                        VerticalAlignment="Center"
+                                        Margin="6">
 
-				<TextBox Canvas.Left="574" 
-						 TextWrapping="Wrap" 
-						 Canvas.Top="561" 
-						 Width="132" 
-						 Height="41" 
-						 FontWeight="Bold" Background="{x:Null}" 
-						 Foreground="White" 
-						 SelectionBrush="{x:Null}" BorderBrush="{x:Null}" VerticalAlignment="Center"
-						 />
-				<!--Suchen Button-->
-				<Button x:Name="SearchButton" 
-						Content="Suchen" 
-						HorizontalAlignment="Left" 
-						Margin="736,558,0,0" 
-						VerticalAlignment="Top" 
-						Height="45"
-						Width="131" 
-						Background="{x:Null}" 
-						BorderBrush="{x:Null}" 
-						Foreground="White" 
-						FontWeight="Bold" 
-						FontFamily="Segoe UI Black" 
-						FontSize="22"/>
+                                <StackPanel Margin="4,0">
+                                    <ProgressBar Orientation="Vertical" Minimum="0" Maximum="255"
+                                                 Value="{Binding CurrentPokemon.Hp}"
+                                                 Height="60" Width="14"  Background="White"/>
+                                    <TextBlock Text="HP" Foreground="White" FontSize="9" TextAlignment="Center"/>
+                                </StackPanel>
 
+                                <StackPanel Margin="4,0">
+                                    <ProgressBar Orientation="Vertical" Minimum="0" Maximum="255"
+                                                 Value="{Binding CurrentPokemon.Attack}"
+                                                 Height="60" Width="14" Foreground="#FFC51503"/>
+                                    <TextBlock Text="ATK" Foreground="White" FontSize="9" TextAlignment="Center"/>
+                                </StackPanel>
 
+                                <StackPanel Margin="4,0">
+                                    <ProgressBar Orientation="Vertical" Minimum="0" Maximum="255"
+                                                 Value="{Binding CurrentPokemon.Defense}"
+                                                 Height="60" Width="14" Foreground="#FF9C620C"/>
+                                    <TextBlock Text="DEF" Foreground="White" FontSize="9" TextAlignment="Center"/>
+                                </StackPanel>
 
-			</Canvas>
-		</Grid>
-	</Grid>
+                                <StackPanel Margin="4,0">
+                                    <ProgressBar Orientation="Vertical" Minimum="0" Maximum="255"
+                                                 Value="{Binding CurrentPokemon.SpecialAttack}"
+                                                 Height="60" Width="14" Foreground="#FF6C0C82"/>
+                                    <TextBlock Text="SpA" Foreground="White" FontSize="9" TextAlignment="Center"/>
+                                </StackPanel>
+
+                                <StackPanel Margin="4,0">
+                                    <ProgressBar Orientation="Vertical" Minimum="0" Maximum="255"
+                                                 Value="{Binding CurrentPokemon.SpecialDefense}"
+                                                 Height="60" Width="14" Foreground="#FF09238E"/>
+                                    <TextBlock Text="SpD" Foreground="White" FontSize="9" TextAlignment="Center"/>
+                                </StackPanel>
+
+                                <StackPanel Margin="4,0">
+                                    <ProgressBar Orientation="Vertical" Minimum="0" Maximum="255"
+                                                 Value="{Binding CurrentPokemon.Speed}"
+                                                 Height="60" Width="14" Foreground="#FF22D4D8"/>
+                                    <TextBlock Text="SPD" Foreground="White" FontSize="9" TextAlignment="Center"/>
+                                </StackPanel>
+
+                            </StackPanel>
+                        </Grid>
+                    </TabItem>
+
+                </TabControl>
+
+                <!--Suche nach Name/ID Feld-->
+                <TextBox Canvas.Left="574"
+                         Canvas.Top="561"
+                         Width="132"
+                         Height="41"
+                         Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}"
+                         TextWrapping="Wrap"
+                         FontWeight="Bold"
+                         Background="{x:Null}"
+                         Foreground="White"
+                         SelectionBrush="{x:Null}"
+                         BorderBrush="{x:Null}"
+                         VerticalAlignment="Center"/>
+
+                <!--Suchen Button-->
+                <Button x:Name="SearchButton"
+                        Content="Suchen"
+                        Command="{Binding SearchCommand}"
+                        Canvas.Left="736"
+                        Canvas.Top="558"
+                        Height="45"
+                        Width="131"
+                        Background="{x:Null}"
+                        BorderBrush="{x:Null}"
+                        Foreground="White"
+                        FontWeight="Bold"
+                        FontFamily="Segoe UI Black"
+                        FontSize="22"/>
+
+                <!--Fehlermeldung-->
+                <TextBlock Text="{Binding ErrorMessage}"
+                           Foreground="Red"
+                           FontWeight="Bold"
+                           Canvas.Left="574"
+                           Canvas.Top="607"
+                           Width="200"/>
+
+            </Canvas>
+        </Grid>
+    </Grid>
 </Window>

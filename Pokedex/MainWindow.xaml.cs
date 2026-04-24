@@ -1,4 +1,5 @@
 ﻿using Pokedex.Models;
+using Pokedex.ViewModels;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
@@ -20,7 +21,9 @@ namespace Pokedex
         public MainWindow()
         {
             InitializeComponent();
-           
+            DataContext = new MainViewModel();
+
+
         }
     }
 }

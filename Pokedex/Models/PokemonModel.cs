@@ -21,6 +21,8 @@ namespace Pokedex.Models
         public int SpecialDefense { get; set; }
         public int Speed { get; set; }
 
+        public string SpriteUrl { get; set; } = string.Empty;
+
 
     }
 }

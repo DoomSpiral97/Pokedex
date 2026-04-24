@@ -56,7 +56,6 @@ namespace Pokedex.Services
                 {
                     Id = pokemon.Id,
                     Name = pokemon.Name,
-                    SpriteUrl = pokemon.Sprites.FrontDefault ?? string.Empty,  
 
                     Types = types,
                     Moves = moves,
@@ -66,6 +65,8 @@ namespace Pokedex.Services
                     SpecialAttack = specialAttack,
                     SpecialDefense = specialDefense,
                     Speed = speed,
+                    SpriteUrl = pokemon.Sprites.FrontDefault ?? string.Empty, 
+
                 };
             }
             catch (HttpRequestException)
