@@ -26,6 +26,7 @@ namespace Pokedex.ViewModels
             await _execute();
         }
 
+        
 
         // Wird benötigt weil ICommand es vorschreibt
         public event EventHandler? CanExecuteChanged;

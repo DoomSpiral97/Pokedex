@@ -1,116 +1,134 @@
-﻿using Pokedex.Models;
+﻿using NAudio.Vorbis;
+using NAudio.Wave;
+using Pokedex.Models;
 using Pokedex.Services;
 using System.ComponentModel;
+using System.IO;
+using System.Net.Http;
 using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
-using NAudio.Wave;
-using NAudio.Vorbis;
-using System.Net.Http;
-using System.IO;
 
 namespace Pokedex.ViewModels
 {
     public class MainViewModel : INotifyPropertyChanged
     {
+        // -------------------------------------------------------
+        // Felder
+        // -------------------------------------------------------
 
-        private PokemonModel? _latestResult;
-
-
-
-        // Service — der einzige Ort der die API kennt
         private readonly PokeApiService _service = new PokeApiService();
-
         private readonly HttpClient _httpClient = new HttpClient();
+        private PokemonModel? _latestResult;
+        private PokemonModel? _currentPokemon;
+        private int?[] _slots = new int?[10];   // nur IDs speichern
+        private int _selectedSlotIndex = -1;
+        private bool _isSaveMode = false;
+        private string _searchText = string.Empty;
+        private bool _isLoading;
+        private string _errorMessage = string.Empty;
 
         // -------------------------------------------------------
         // Properties
         // -------------------------------------------------------
 
-        private PokemonModel? _currentPokemon;
         public PokemonModel? CurrentPokemon
         {
-            get { return _currentPokemon; }
+            get => _currentPokemon;
             set { _currentPokemon = value; OnPropertyChanged(); }
         }
 
-        private string _searchText = string.Empty;
+        public int SelectedSlotIndex
+        {
+            get => _selectedSlotIndex;
+            set { _selectedSlotIndex = value; OnPropertyChanged(); }
+        }
+
+        public bool IsSaveMode
+        {
+            get => _isSaveMode;
+            set { _isSaveMode = value; OnPropertyChanged(); }
+        }
+
         public string SearchText
         {
-            get { return _searchText; }
+            get => _searchText;
             set { _searchText = value; OnPropertyChanged(); }
         }
 
-        private bool _isLoading;
         public bool IsLoading
         {
-            get { return _isLoading; }
+            get => _isLoading;
             set { _isLoading = value; OnPropertyChanged(); }
         }
 
-        private string _errorMessage = string.Empty;
         public string ErrorMessage
         {
-            get { return _errorMessage; }
+            get => _errorMessage;
             set { _errorMessage = value; OnPropertyChanged(); }
         }
 
-        // Command
+        // -------------------------------------------------------
+        // Commands
+        // -------------------------------------------------------
 
         public ICommand SearchCommand { get; }
-
         public ICommand PlaySoundCommand { get; }
-
         public ICommand NextPokemonCommand { get; }
         public ICommand PreviousPokemonCommand { get; }
+        public ICommand ActivateSaveModeCommand { get; }
+
+        public ICommand DeleteCommand { get; }
+
+
+        // -------------------------------------------------------
+        // Konstruktor
+        // -------------------------------------------------------
 
         public MainViewModel()
         {
             SearchCommand = new RelayCommand(SearchPokemonAsync);
             PlaySoundCommand = new RelayCommand(PlayCryAsync);
-            NextPokemonCommand = new RelayCommand(NextPokemonAsync);      
+            NextPokemonCommand = new RelayCommand(NextPokemonAsync);
             PreviousPokemonCommand = new RelayCommand(PreviousPokemonAsync);
+            DeleteCommand = new RelayCommand(DeleteSlot);
+
         }
 
+        // -------------------------------------------------------
         // Methoden
+        // -------------------------------------------------------
+
+        // Ergebnis aus dem Service ans ViewModel übergeben
         private void UpdateUI()
         {
-            // Wenn nix zurückgekommen ist → Fehlermeldung zeigen
             if (_latestResult == null)
-            {
                 ErrorMessage = "Pokémon nicht gefunden!";
-            }
             else
-            {
-                // Alles gut → Pokémon ans ViewModel übergeben Bindings aktualisieren die UI automatisch
                 CurrentPokemon = _latestResult;
-            }
 
-            // Ladeanimation wieder aus
             IsLoading = false;
         }
 
+        // Pokémon per Name oder ID aus der API laden
         private async Task SearchPokemonAsync()
         {
-            // Nix tun wenn das Suchfeld leer ist
             if (string.IsNullOrWhiteSpace(SearchText)) return;
 
-            // Ladeanimation an und alte Fehlermeldung wegräumen
             IsLoading = true;
             ErrorMessage = string.Empty;
 
-            // Service fragen — läuft im Hintergrund, UI bleibt reaktiv-> Ergebnis im Zwischenspeicher parken damit UpdateUI rankommt
             _latestResult = await _service.GetPokemonAsync(SearchText);
 
-            // Nach dem await sind wir evtl. auf einem fremden Thread,Dispatcher bringt uns zurück auf den UI-Thread und führt UpdateUI dort aus
             Application.Current.Dispatcher.Invoke(UpdateUI);
         }
 
+        // Cry als OGG-Stream laden und abspielen
         private async Task PlayCryAsync()
         {
             if (CurrentPokemon == null) return;
-            if (string.IsNullOrEmpty(CurrentPokemon.SoundUrl)) return;  // ← war SoundUrl
+            if (string.IsNullOrEmpty(CurrentPokemon.SoundUrl)) return;
 
             byte[] audioData = await _httpClient.GetByteArrayAsync(CurrentPokemon.SoundUrl);
             MemoryStream memoryStream = new MemoryStream(audioData);
@@ -120,35 +138,59 @@ namespace Pokedex.ViewModels
             waveOut.Play();
 
             while (waveOut.PlaybackState == PlaybackState.Playing)
-            {
                 await Task.Delay(100);
-            }
 
             waveOut.Dispose();
             vorbisReader.Dispose();
             memoryStream.Dispose();
         }
 
+        // Nächstes Pokémon laden (ID + 1)
         private async Task NextPokemonAsync()
         {
-            // Nix tun wenn kein Pokémon geladen
             if (CurrentPokemon == null) return;
-
-            // ID um 1 erhöhen und als String suchen
             SearchText = (CurrentPokemon.Id + 1).ToString();
             await SearchPokemonAsync();
         }
 
+        // Vorheriges Pokémon laden (ID - 1, min. 1)
         private async Task PreviousPokemonAsync()
         {
-            // Nix tun wenn kein Pokémon geladen oder schon bei #1
-            if (CurrentPokemon == null) return;
-            if (CurrentPokemon.Id <= 1) return;
-
-            // ID um 1 verringern und als String suchen
+            if (CurrentPokemon == null || CurrentPokemon.Id <= 1) return;
             SearchText = (CurrentPokemon.Id - 1).ToString();
             await SearchPokemonAsync();
         }
+
+        // Slot laden oder speichern je nach Modus
+        public async Task SlotClick(int index)
+        {
+            if (IsSaveMode)
+            {
+                if (CurrentPokemon == null) return;
+                _slots[index] = CurrentPokemon.Id;
+                SelectedSlotIndex = index;
+                IsSaveMode = false;
+            }
+            else
+            {
+                if (_slots[index] == null) return;
+                SearchText = _slots[index].ToString()!;
+                SelectedSlotIndex = index;
+                await SearchPokemonAsync();
+            }
+        }
+
+        private void DeleteSlot()
+        {
+            if (_selectedSlotIndex == -1) return;  // kein Slot ausgewählt
+
+            _slots[_selectedSlotIndex] = null;
+            _selectedSlotIndex = -1;
+        }
+
+        // -------------------------------------------------------
+        // INotifyPropertyChanged
+        // -------------------------------------------------------
 
         public event PropertyChangedEventHandler? PropertyChanged;
 
@@ -156,8 +198,5 @@ namespace Pokedex.ViewModels
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
-
-
-
     }
 }

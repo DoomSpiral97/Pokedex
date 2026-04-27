@@ -82,18 +82,16 @@
             <Canvas Width="964" Height="662">
 
                 <!--Slot Buttons-->
-                <Button x:Name="Slot1Button"  Style="{StaticResource InvisibleButtonStyle}" Canvas.Left="581" Canvas.Top="351" Width="54" Height="37"/>
-                <Button x:Name="Slot2Button"  Style="{StaticResource InvisibleButtonStyle}" Canvas.Left="640" Canvas.Top="350" Width="52" Height="39"/>
-                <Button x:Name="Slot3Button"  Style="{StaticResource InvisibleButtonStyle}" Canvas.Left="697" Canvas.Top="351" Width="55" Height="37"/>
-                <Button x:Name="Slot4Button"  Style="{StaticResource InvisibleButtonStyle}" Canvas.Left="757" Canvas.Top="350" Width="54" Height="39"/>
-                <Button x:Name="Slot5Button"  Style="{StaticResource InvisibleButtonStyle}" Canvas.Left="814" Canvas.Top="351" Width="54" Height="37"/>
-
-                <Button x:Name="Slot6Button"  Style="{StaticResource InvisibleButtonStyle}" Canvas.Left="580" Canvas.Top="392" Width="55" Height="37"/>
-                <Button x:Name="Slot7Button"  Style="{StaticResource InvisibleButtonStyle}" Canvas.Left="640" Canvas.Top="392" Width="54" Height="37"/>
-                <Button x:Name="Slot8Button"  Style="{StaticResource InvisibleButtonStyle}" Canvas.Left="697" Canvas.Top="392" Width="55" Height="37"/>
-                <Button x:Name="Slot9Button"  Style="{StaticResource InvisibleButtonStyle}" Canvas.Left="757" Canvas.Top="393" Width="54" Height="36"/>
-                <Button x:Name="Slot10Button" Style="{StaticResource InvisibleButtonStyle}" Canvas.Left="816" Canvas.Top="391" Width="52" Height="38"/>
-
+                <Button x:Name="Slot1Button"  Tag="0" Click="Slot_Click" Style="{StaticResource InvisibleButtonStyle}" Canvas.Left="581" Canvas.Top="351" Width="54" Height="37"/>
+                <Button x:Name="Slot2Button"  Tag="1" Click="Slot_Click" Style="{StaticResource InvisibleButtonStyle}" Canvas.Left="640" Canvas.Top="350" Width="52" Height="39"/>
+                <Button x:Name="Slot3Button"  Tag="2" Click="Slot_Click" Style="{StaticResource InvisibleButtonStyle}" Canvas.Left="697" Canvas.Top="351" Width="55" Height="37"/>
+                <Button x:Name="Slot4Button"  Tag="3" Click="Slot_Click" Style="{StaticResource InvisibleButtonStyle}" Canvas.Left="757" Canvas.Top="350" Width="54" Height="39"/>
+                <Button x:Name="Slot5Button"  Tag="4" Click="Slot_Click" Style="{StaticResource InvisibleButtonStyle}" Canvas.Left="814" Canvas.Top="351" Width="54" Height="37"/>
+                <Button x:Name="Slot6Button"  Tag="5" Click="Slot_Click" Style="{StaticResource InvisibleButtonStyle}" Canvas.Left="580" Canvas.Top="392" Width="55" Height="37"/>
+                <Button x:Name="Slot7Button"  Tag="6" Click="Slot_Click" Style="{StaticResource InvisibleButtonStyle}" Canvas.Left="640" Canvas.Top="392" Width="54" Height="37"/>
+                <Button x:Name="Slot8Button"  Tag="7" Click="Slot_Click" Style="{StaticResource InvisibleButtonStyle}" Canvas.Left="697" Canvas.Top="392" Width="55" Height="37"/>
+                <Button x:Name="Slot9Button"  Tag="8" Click="Slot_Click" Style="{StaticResource InvisibleButtonStyle}" Canvas.Left="757" Canvas.Top="393" Width="54" Height="36"/>
+                <Button x:Name="Slot10Button" Tag="9" Click="Slot_Click" Style="{StaticResource InvisibleButtonStyle}" Canvas.Left="816" Canvas.Top="391" Width="52" Height="38"/>
                 <!--LinksRechts Navigation Buttons-->
                 <Button x:Name="LeftKeypadButton"
                          Command="{Binding PreviousPokemonCommand}"
@@ -115,9 +113,11 @@
                         BorderBrush="Transparent"
         />
 
-                <!--Speichern Löschen Buttons-->
-                <Button x:Name="SaveButton"   Style="{StaticResource InvisibleButtonStyle}" Canvas.Left="581" Canvas.Top="475" Width="54"  Height="37" HorizontalAlignment="Center"/>
-                <Button x:Name="DeleteButton" Style="{StaticResource InvisibleButtonStyle}" Canvas.Left="638" Canvas.Top="474" Width="58"  Height="38"/>
+                <!--Speichern  Buttons-->
+                <Button x:Name="SaveButton" Command="{Binding ActivateSaveModeCommand}" Style="{StaticResource InvisibleButtonStyle}" Canvas.Left="581" Canvas.Top="475" Width="54" Height="37"/>
+                
+                <!--Delete Button-->
+                <Button x:Name="DeleteButton" Command="{Binding DeleteCommand}" Style="{StaticResource InvisibleButtonStyle}" Canvas.Left="638" Canvas.Top="474" Width="58" Height="38"/>
 
                 <!--Pokemon Sprite Image-->
                 <Image x:Name="PokemonSpriteImage"
