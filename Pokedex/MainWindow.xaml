@@ -59,7 +59,7 @@
                 </Setter.Value>
             </Setter>
         </Style>
-        
+
         <!--Converter-->
         <converters:TypeIconConverter x:Key="TypeIconConverter"/>
 
@@ -114,10 +114,17 @@
         />
 
                 <!--Speichern  Buttons-->
-                <Button x:Name="SaveButton" Command="{Binding ActivateSaveModeCommand}" Style="{StaticResource InvisibleButtonStyle}" Canvas.Left="581" Canvas.Top="475" Width="54" Height="37"/>
-                
-                <!--Delete Button-->
-                <Button x:Name="DeleteButton" Command="{Binding DeleteCommand}" Style="{StaticResource InvisibleButtonStyle}" Canvas.Left="638" Canvas.Top="474" Width="58" Height="38"/>
+                <Button x:Name="SaveButton"
+                       Command="{Binding ActivateSaveModeCommand}"
+                      Style="{StaticResource InvisibleButtonStyle}"
+                       Canvas.Left="581" Canvas.Top="475"
+                     Width="54" Height="37"/>
+
+                <Button x:Name="DeleteButton"
+                          Command="{Binding DeleteCommand}"
+                            Style="{StaticResource InvisibleButtonStyle}"
+                        Canvas.Left="638" Canvas.Top="474"
+                         Width="58" Height="38"/>
 
                 <!--Pokemon Sprite Image-->
                 <Image x:Name="PokemonSpriteImage"
@@ -331,7 +338,10 @@
                         </ControlTemplate>
                     </Button.Template>
                 </Button>
+
+                <Label Content="Label" HorizontalAlignment="Left" Margin="574,440,0,0" VerticalAlignment="Top" Width="295" Background="#FF272020" Height="24" FontWeight="Bold" Foreground="#FFFDF8F8"/>
             </Canvas>
+            
         </Grid>
     </Grid>
 </Window>

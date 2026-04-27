@@ -26,7 +26,14 @@ namespace Pokedex.ViewModels
             await _execute();
         }
 
-        
+        public RelayCommand(Action execute)
+        {
+            _execute = () =>
+            {
+                execute();
+                return Task.CompletedTask;
+            };
+        }
 
         // Wird benötigt weil ICommand es vorschreibt
         public event EventHandler? CanExecuteChanged;

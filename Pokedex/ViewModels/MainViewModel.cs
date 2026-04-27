@@ -93,6 +93,8 @@ namespace Pokedex.ViewModels
             NextPokemonCommand = new RelayCommand(NextPokemonAsync);
             PreviousPokemonCommand = new RelayCommand(PreviousPokemonAsync);
             DeleteCommand = new RelayCommand(DeleteSlot);
+            ActivateSaveModeCommand = new RelayCommand(ActivateSaveMode);
+            DeleteCommand = new RelayCommand(DeleteSlot);
 
         }
 
@@ -186,6 +188,11 @@ namespace Pokedex.ViewModels
 
             _slots[_selectedSlotIndex] = null;
             _selectedSlotIndex = -1;
+        }
+
+        private void ActivateSaveMode()
+        {
+            IsSaveMode = true;
         }
 
         // -------------------------------------------------------
