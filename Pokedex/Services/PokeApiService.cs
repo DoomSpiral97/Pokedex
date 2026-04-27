@@ -8,17 +8,24 @@ namespace Pokedex.Services
 {
     public class PokeApiService
     {
-        // Erstellt Wrapper Instanz einmalig
         private PokeApiClient _client = new PokeApiClient();
 
         public async Task<PokemonModel?> GetPokemonAsync(string nameOrId)
         {
             try
             {
-                // API-Call — holt das Pokemon-Objekt vom Wrapper
                 Pokemon pokemon = await _client.GetResourceAsync<Pokemon>(
                     nameOrId.ToLower().Trim()
                 );
+
+                // Deutschen Pokémon-Namen holen
+                PokemonSpecies species = await _client.GetResourceAsync<PokemonSpecies>(pokemon.Id);
+                string name = string.Empty;
+                foreach (Names entry in species.Names)
+                {
+                    if (entry.Language.Name == "de")
+                        name = entry.Name;
+                }
 
                 // Types befüllen
                 List<string> types = new List<string>();
@@ -27,13 +34,18 @@ namespace Pokedex.Services
                     types.Add(Capitalize(pokemonType.Type.Name));
                 }
 
-                // Moves befüllen (nur die ersten 4)
+                // Moves befüllen (nur die ersten 4 — deutsch)
                 List<string> moves = new List<string>();
                 int moveCount = 0;
                 foreach (PokemonMove pokemonMove in pokemon.Moves)
                 {
                     if (moveCount >= 4) break;
-                    moves.Add(Capitalize(pokemonMove.Move.Name));
+                    Move move = await _client.GetResourceAsync<Move>(pokemonMove.Move.Name);
+                    foreach (Names entry in move.Names)
+                    {
+                        if (entry.Language.Name == "de")
+                            moves.Add(entry.Name);
+                    }
                     moveCount++;
                 }
 
@@ -54,8 +66,7 @@ namespace Pokedex.Services
                 return new PokemonModel
                 {
                     Id = pokemon.Id,
-                    Name =Capitalize(pokemon.Name),
-
+                    Name = name,
                     Types = types,
                     Moves = moves,
                     Hp = hp,
@@ -74,7 +85,6 @@ namespace Pokedex.Services
             }
         }
 
-        // Hilfsmethode in PokeApiService.cs
         private string Capitalize(string text)
         {
             if (string.IsNullOrEmpty(text)) return text;

@@ -28,6 +28,8 @@ namespace Pokedex.ViewModels
         private string _searchText = string.Empty;
         private bool _isLoading;
         private string _errorMessage = string.Empty;
+        private string _statusMessage = string.Empty;
+
 
         // -------------------------------------------------------
         // Properties
@@ -67,6 +69,12 @@ namespace Pokedex.ViewModels
         {
             get => _errorMessage;
             set { _errorMessage = value; OnPropertyChanged(); }
+        }
+
+        public string StatusMessage
+        {
+            get => _statusMessage;
+            set { _statusMessage = value; OnPropertyChanged(); }
         }
 
         // -------------------------------------------------------
@@ -169,30 +177,50 @@ namespace Pokedex.ViewModels
             if (IsSaveMode)
             {
                 if (CurrentPokemon == null) return;
+
                 _slots[index] = CurrentPokemon.Id;
                 SelectedSlotIndex = index;
                 IsSaveMode = false;
+                StatusMessage = $"✓ {CurrentPokemon.Name} in Slot {index + 1} gespeichert!";
             }
             else
             {
-                if (_slots[index] == null) return;
+                if (_slots[index] == null)
+                {
+                    StatusMessage = $"⚠ Slot {index + 1} ist leer";
+                    return;
+                }
+
                 SearchText = _slots[index].ToString()!;
                 SelectedSlotIndex = index;
                 await SearchPokemonAsync();
+                StatusMessage = $"Slot {index + 1} geladen";
             }
         }
 
         private void DeleteSlot()
         {
-            if (_selectedSlotIndex == -1) return;  // kein Slot ausgewählt
+            if (_selectedSlotIndex == -1)
+            {
+                StatusMessage = "⚠ Kein Slot ausgewählt";
+                return;
+            }
 
             _slots[_selectedSlotIndex] = null;
+            StatusMessage = $"🗑 Slot {_selectedSlotIndex + 1} wurde geleert";
             _selectedSlotIndex = -1;
         }
 
         private void ActivateSaveMode()
         {
+            if (CurrentPokemon == null)
+            {
+                StatusMessage = "⚠ Kein Pokémon geladen!";
+                return;
+            }
+
             IsSaveMode = true;
+            StatusMessage = $"Wähle einen Slot für {CurrentPokemon.Name}";
         }
 
         // -------------------------------------------------------
