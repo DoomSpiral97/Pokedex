@@ -104,6 +104,8 @@ namespace Pokedex.ViewModels
             ActivateSaveModeCommand = new RelayCommand(ActivateSaveMode);
             DeleteCommand = new RelayCommand(DeleteSlot);
 
+           
+
         }
 
         // -------------------------------------------------------

@@ -9,6 +9,8 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Media\delete.png" />
+    <None Remove="Media\download.png" />
     <None Remove="Media\Icons\Icon Bug.png" />
     <None Remove="Media\Icons\Icon Dark.png" />
     <None Remove="Media\Icons\Icon Dragon.png" />
@@ -38,6 +40,8 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="Media\delete.png" />
+    <Resource Include="Media\download.png" />
     <Resource Include="Media\Icons\Icon Bug.png" />
     <Resource Include="Media\Icons\Icon Dark.png" />
     <Resource Include="Media\Icons\Icon Dragon.png" />
