@@ -64,8 +64,4 @@
     <Resource Include="Media\PokemonBackground.png" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Views\" />
-  </ItemGroup>
-
 </Project>

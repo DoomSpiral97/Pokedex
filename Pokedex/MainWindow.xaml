@@ -119,7 +119,7 @@
                       Style="{StaticResource InvisibleButtonStyle}"
                        Canvas.Left="581" Canvas.Top="475"
                      Width="54" Height="37">
-                    <Image Height="23" Source="/Media/download.png" Stretch="Fill" Width="27"/>
+                    <Image Height="37" Source="/Media/download.png" Stretch="Fill" Width="38"/>
                 </Button>
 
                 <Button x:Name="DeleteButton"
@@ -127,9 +127,11 @@
                             Style="{StaticResource InvisibleButtonStyle}"
                         Canvas.Left="638" Canvas.Top="474"
                         
-                         Width="58" Height="38">  <Image Height="32" Canvas.Left="650" Source="/Media/delete.png" Stretch="Fill" Canvas.Top="477" Width="34"/></Button>
-                                      
-                  
+                         Width="58" Height="38">
+                    <Image Height="32" Canvas.Left="650" Source="/Media/delete.png" Stretch="Fill" Canvas.Top="477" Width="34"/>
+                </Button>
+
+
 
                 <!--Pokemon Sprite Image-->
                 <Image x:Name="PokemonSpriteImage"
