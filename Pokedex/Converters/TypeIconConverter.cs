@@ -20,6 +20,8 @@ namespace Pokedex.Converters
             return string.Empty;
         }
 
+
+        //nicht eingebaut
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
             throw new NotImplementedException();

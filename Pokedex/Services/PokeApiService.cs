@@ -18,7 +18,7 @@ namespace Pokedex.Services
                     nameOrId.ToLower().Trim()
                 );
 
-                // Deutschen Pokémon-Namen holen
+                // Deutschen Pokémon-Namen holen 2.API Aufruf, Schleife géht durhc alle einträge und speichert de
                 PokemonSpecies species = await _client.GetResourceAsync<PokemonSpecies>(pokemon.Id);
                 string name = string.Empty;
                 foreach (Names entry in species.Names)
@@ -31,7 +31,7 @@ namespace Pokedex.Services
                 List<string> types = new List<string>();
                 foreach (PokemonType pokemonType in pokemon.Types)
                 {
-                    types.Add(Capitalize(pokemonType.Type.Name));
+                    types.Add(pokemonType.Type.Name);
                 }
 
                 // Moves befüllen (nur die ersten 4 — deutsch)
@@ -39,9 +39,9 @@ namespace Pokedex.Services
                 int moveCount = 0;
                 foreach (PokemonMove pokemonMove in pokemon.Moves)
                 {
-                    if (moveCount >= 4) break;
+                    if (moveCount >= 4) break; // Max 4 Moves da Pokemon bis zu 30 Moves haben
                     Move move = await _client.GetResourceAsync<Move>(pokemonMove.Move.Name);
-                    foreach (Names entry in move.Names)
+                    foreach (Names entry in move.Names)  // Filtern nach Deutschen Namen
                     {
                         if (entry.Language.Name == "de")
                             moves.Add(entry.Name);
@@ -75,7 +75,7 @@ namespace Pokedex.Services
                     SpecialAttack = specialAttack,
                     SpecialDefense = specialDefense,
                     Speed = speed,
-                    SpriteUrl = pokemon.Sprites.FrontDefault ?? string.Empty,
+                    SpriteUrl = pokemon.Sprites.FrontDefault,
                     SoundUrl = $"https://raw.githubusercontent.com/PokeAPI/cries/main/cries/pokemon/latest/{pokemon.Id}.ogg",
                 };
             }

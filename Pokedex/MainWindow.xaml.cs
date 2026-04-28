@@ -15,11 +15,11 @@ namespace Pokedex
             DataContext = _viewModel;
         }
 
-        // Ein Handler für alle Slot Buttons
+        // Ein Handler für alle Slot Buttons 
         private async void Slot_Click(object sender, RoutedEventArgs e)
         {
-            int index = int.Parse(((Button)sender).Tag.ToString());
-            await _viewModel.SlotClick(index);
+            int index = int.Parse(((Button)sender).Tag.ToString()); //ButtonTag zu String -> zu int
+            await _viewModel.SlotClick(index); // SlotClick Methode im VM
         }
     }
 }
