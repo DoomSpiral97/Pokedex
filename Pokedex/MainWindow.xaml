@@ -100,8 +100,7 @@
                          Width="34"
                          Height="31" 
                          Background="Transparent" 
-                         BorderBrush="Transparent"
-       />
+                         BorderBrush="Transparent"/>
 
                 <Button x:Name="RightKeypadButton"
                         Command="{Binding NextPokemonCommand}"
@@ -110,15 +109,14 @@
                          Width="33"
                          Height="34" 
                         Background="Transparent" 
-                        BorderBrush="Transparent"
-        />
+                        BorderBrush="Transparent"/>
 
                 <!--Speichern  Buttons-->
                 <Button x:Name="SaveButton"
-                       Command="{Binding ActivateSaveModeCommand}"
-                      Style="{StaticResource InvisibleButtonStyle}"
-                       Canvas.Left="581" Canvas.Top="475"
-                     Width="54" Height="37">
+                        Command="{Binding ActivateSaveModeCommand}"
+                        Style="{StaticResource InvisibleButtonStyle}"
+                        Canvas.Left="581" Canvas.Top="475"
+                        Width="54" Height="37">
                     <Image Height="37" Source="/Media/download.png" Stretch="Fill" Width="38"/>
                 </Button>
 
@@ -194,10 +192,10 @@
                     <TabItem>
                         <TabItem.Header>
                             <TextBlock Text="Attacken"
-                   Foreground="White"
-                   TextAlignment="Center"
-                   HorizontalAlignment="Stretch"
-                   FontWeight="Bold"/>
+                                        Foreground="White"
+                                        TextAlignment="Center"
+                                        HorizontalAlignment="Stretch"
+                                        FontWeight="Bold"/>
                         </TabItem.Header>
                         <Grid Background="Transparent" Margin="6">
                             <ItemsControl ItemsSource="{Binding CurrentPokemon.Moves}">
@@ -209,15 +207,15 @@
                                 <ItemsControl.ItemTemplate>
                                     <DataTemplate>
                                         <Border Margin="2"
-                            Background="#33FFFFFF"
-                            CornerRadius="4"
-                            Padding="4,3">
+                                                Background="#33FFFFFF"
+                                                CornerRadius="4"
+                                                Padding="4,3">
                                             <TextBlock Text="{Binding}"
-                                   Foreground="White"
-                                   FontSize="11"
-                                   FontWeight="Bold"
-                                   TextAlignment="Center"
-                                   VerticalAlignment="Center"/>
+                                                       Foreground="White"
+                                                       FontSize="11"
+                                                       FontWeight="Bold"
+                                                        TextAlignment="Center"
+                                                       VerticalAlignment="Center"/>
                                         </Border>
                                     </DataTemplate>
                                 </ItemsControl.ItemTemplate>
@@ -332,7 +330,7 @@
                         Canvas.Left="136"
                         Canvas.Top="410"
                         Width="38"
-                         Height="36"
+                        Height="36"
                         Content="🔊"
                         Foreground="White"
                         FontSize="18"
@@ -347,17 +345,17 @@
                 </Button>
 
                 <Border Canvas.Left="574"
-        Canvas.Top="440"
-        Width="295"
-        Height="24"
-        Background="#FF272020"
-        CornerRadius="6">
+                        Canvas.Top="440"
+                        Width="295"
+                        Height="24"
+                        Background="#FF272020"
+                        CornerRadius="6">
                     <TextBlock Text="{Binding StatusMessage}"
-               Foreground="#FFFDF8F8"
-               FontWeight="Bold"
-               FontSize="11"
-               HorizontalAlignment="Center"
-               VerticalAlignment="Center"/>
+                               Foreground="#FFFDF8F8"
+                               FontWeight="Bold"
+                               FontSize="11"
+                               HorizontalAlignment="Center"
+                               VerticalAlignment="Center"/>
                 </Border>
             </Canvas>
 

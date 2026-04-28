@@ -26,9 +26,9 @@ namespace Pokedex.ViewModels
         private int _selectedSlotIndex = -1;
         private bool _isSaveMode = false;
         private string _searchText = string.Empty;
-        private bool _isLoading;
         private string _errorMessage = string.Empty;
         private string _statusMessage = string.Empty;
+
 
 
         // -------------------------------------------------------
@@ -59,17 +59,6 @@ namespace Pokedex.ViewModels
             set { _searchText = value; OnPropertyChanged(); }
         }
 
-        public bool IsLoading
-        {
-            get => _isLoading;
-            set { _isLoading = value; OnPropertyChanged(); }
-        }
-
-        public string ErrorMessage
-        {
-            get => _errorMessage;
-            set { _errorMessage = value; OnPropertyChanged(); }
-        }
 
         public string StatusMessage
         {
@@ -102,9 +91,6 @@ namespace Pokedex.ViewModels
             PreviousPokemonCommand = new RelayCommand(PreviousPokemonAsync);
             DeleteCommand = new RelayCommand(DeleteSlot);
             ActivateSaveModeCommand = new RelayCommand(ActivateSaveMode);
-            DeleteCommand = new RelayCommand(DeleteSlot);
-
-           
 
         }
 
@@ -116,11 +102,10 @@ namespace Pokedex.ViewModels
         private void UpdateUI()
         {
             if (_latestResult == null)
-                ErrorMessage = "Pokémon nicht gefunden!";
+                StatusMessage = "Pokémon nicht gefunden!";
             else
                 CurrentPokemon = _latestResult;
 
-            IsLoading = false;
         }
 
         // Pokémon per Name oder ID aus der API laden
@@ -128,8 +113,7 @@ namespace Pokedex.ViewModels
         {
             if (string.IsNullOrWhiteSpace(SearchText)) return;
 
-            IsLoading = true;
-            ErrorMessage = string.Empty;
+            StatusMessage = string.Empty;
 
             _latestResult = await _service.GetPokemonAsync(SearchText);
 
@@ -180,6 +164,13 @@ namespace Pokedex.ViewModels
             {
                 if (CurrentPokemon == null) return;
 
+                if (_slots[index] != null)
+                {
+                    StatusMessage = $"⚠ Slot {index + 1} ist bereits belegt!";
+                    IsSaveMode = false;
+                    return;
+                }
+
                 _slots[index] = CurrentPokemon.Id;
                 SelectedSlotIndex = index;
                 IsSaveMode = false;
@@ -196,7 +187,7 @@ namespace Pokedex.ViewModels
                 SearchText = _slots[index].ToString()!;
                 SelectedSlotIndex = index;
                 await SearchPokemonAsync();
-                StatusMessage = $"Slot {index + 1} geladen";
+                StatusMessage = $"Slot {index + 1} aktuell von {CurrentPokemon.Name} belegt.";
             }
         }
 
@@ -209,7 +200,7 @@ namespace Pokedex.ViewModels
             }
 
             _slots[_selectedSlotIndex] = null;
-            StatusMessage = $"🗑 Slot {_selectedSlotIndex + 1} wurde geleert";
+            StatusMessage = $"{CurrentPokemon.Name} wurde aus Slot {_selectedSlotIndex + 1} entfernt. ";
             _selectedSlotIndex = -1;
         }
 
@@ -217,7 +208,7 @@ namespace Pokedex.ViewModels
         {
             if (CurrentPokemon == null)
             {
-                StatusMessage = "⚠ Kein Pokémon geladen!";
+                StatusMessage = "⚠ Kein Pokémon zum Speichern ausgewählt!";
                 return;
             }
 
@@ -228,8 +219,8 @@ namespace Pokedex.ViewModels
         // -------------------------------------------------------
         // INotifyPropertyChanged
         // -------------------------------------------------------
-
         public event PropertyChangedEventHandler? PropertyChanged;
+
 
         protected void OnPropertyChanged([CallerMemberName] string? propertyName = null)
         {

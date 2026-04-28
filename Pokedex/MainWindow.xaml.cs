@@ -18,7 +18,7 @@ namespace Pokedex
         // Ein Handler für alle Slot Buttons
         private async void Slot_Click(object sender, RoutedEventArgs e)
         {
-            int index = int.Parse(((Button)sender).Tag.ToString()!);
+            int index = int.Parse(((Button)sender).Tag.ToString());
             await _viewModel.SlotClick(index);
         }
     }
