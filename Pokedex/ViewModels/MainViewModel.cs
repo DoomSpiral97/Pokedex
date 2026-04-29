@@ -75,7 +75,6 @@ public class MainViewModel : INotifyPropertyChanged
     public ICommand NextPokemonCommand { get; }
     public ICommand PreviousPokemonCommand { get; }
     public ICommand ActivateSaveModeCommand { get; }
-
     public ICommand DeleteCommand { get; }
 
 
@@ -97,49 +96,31 @@ public class MainViewModel : INotifyPropertyChanged
     // -------------------------------------------------------
     // Methoden
     // -------------------------------------------------------
+     
+    
+    // Pokémon per Name oder ID aus der API laden
+        private async Task SearchPokemonAsync()
+        {
+            if (string.IsNullOrWhiteSpace(SearchText)) return;
 
+           _latestResult = await _service.GetPokemonAsync(SearchText);
+
+            Application.Current.Dispatcher.Invoke(UpdateUI);
+        }
+       
     // Ergebnis aus dem Service ans ViewModel übergeben
-    private void UpdateUI()
-    {
+        private void UpdateUI()
+         {
         if (_latestResult == null)
             StatusMessage = "Pokémon nicht gefunden!";
         else
             CurrentPokemon = _latestResult;
 
-    }
+        }
 
-    // Pokémon per Name oder ID aus der API laden
-    private async Task SearchPokemonAsync()
-    {
-        if (string.IsNullOrWhiteSpace(SearchText)) return;
+   
 
-        StatusMessage = string.Empty;
-
-        _latestResult = await _service.GetPokemonAsync(SearchText);
-
-        Application.Current.Dispatcher.Invoke(UpdateUI);
-    }
-
-    // Cry als OGG-Stream laden und abspielen
-    private async Task PlayCryAsync()
-    {
-        if (CurrentPokemon == null) return;
-        if (string.IsNullOrEmpty(CurrentPokemon.SoundUrl)) return;
-
-        byte[] audioData = await _httpClient.GetByteArrayAsync(CurrentPokemon.SoundUrl);
-        MemoryStream memoryStream = new MemoryStream(audioData);
-        VorbisWaveReader vorbisReader = new VorbisWaveReader(memoryStream);
-        WaveOutEvent waveOut = new WaveOutEvent();
-        waveOut.Init(vorbisReader);
-        waveOut.Play();
-
-        while (waveOut.PlaybackState == PlaybackState.Playing)
-            await Task.Delay(100);
-
-        waveOut.Dispose();
-        vorbisReader.Dispose();
-        memoryStream.Dispose();
-    }
+   
 
     // Nächstes Pokémon laden (ID + 1)
     private async Task NextPokemonAsync()
@@ -215,6 +196,28 @@ public class MainViewModel : INotifyPropertyChanged
         IsSaveMode = true;
         StatusMessage = $"Wähle einen Slot für {CurrentPokemon.Name}";
     }
+    
+    // Cry als OGG-Stream laden und abspielen
+    private async Task PlayCryAsync()
+    {
+        if (CurrentPokemon == null) return;
+        if (string.IsNullOrEmpty(CurrentPokemon.SoundUrl)) return;
+
+        byte[] audioData = await _httpClient.GetByteArrayAsync(CurrentPokemon.SoundUrl);
+        MemoryStream memoryStream = new MemoryStream(audioData);
+        VorbisWaveReader vorbisReader = new VorbisWaveReader(memoryStream);
+        WaveOutEvent waveOut = new WaveOutEvent();
+        waveOut.Init(vorbisReader);
+        waveOut.Play();
+
+        while (waveOut.PlaybackState == PlaybackState.Playing)
+            await Task.Delay(100);
+
+        waveOut.Dispose();
+        vorbisReader.Dispose();
+        memoryStream.Dispose();
+    }
+
 
     // -------------------------------------------------------
     // INotifyPropertyChanged

@@ -1,4 +1,4 @@
-﻿using PokeApiNet;  //
+﻿using PokeApiNet;  
 using Pokedex.Models;
 using System.Collections.Generic;
 using System.Net.Http;

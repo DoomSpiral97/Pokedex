@@ -317,13 +317,7 @@
                         FontFamily="Segoe UI Black"
                         FontSize="22"/>
 
-                <!--Fehlermeldung-->
-                <TextBlock Text="{Binding ErrorMessage}"
-                           Foreground="Red"
-                           FontWeight="Bold"
-                           Canvas.Left="574"
-                           Canvas.Top="607"
-                           Width="200"/>
+                
 
                 <!--Sound Button-->
                 <Button Command="{Binding PlaySoundCommand}"
